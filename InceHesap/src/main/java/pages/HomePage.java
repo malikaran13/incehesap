@@ -1,4 +1,5 @@
 package pages;
+import constants.HomePageXPATHConstants;
 import interfaces.IHomePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -7,23 +8,21 @@ import java.io.FileNotFoundException;
 
 public class HomePage extends PageObject implements IHomePage {
 
-    By query = By.id("query");
-
     public HomePage(WebDriver driver){
         super(driver);
     }
 
     public void acceptCookies(){
-        driver.findElement(By.xpath("//*[@class=\"btn btn-primary btn-cerez\"]")).click();
+        driver.findElement(By.xpath(HomePageXPATHConstants.ACCEPT_COOKIES)).click();
     }
 
     public void queryProduct(String item){
-        driver.findElement(query).sendKeys(item);
+        driver.findElement(By.id("query")).sendKeys(item);
     }
 
     public void selectResultProduct() throws InterruptedException {
         Thread.sleep(2000);
-        driver.findElement(By.xpath("/html/body/div[2]/div[1]/header/div[2]/section/div[1]/div/div/div[2]/ul/li[1]/a/span")).click();
+        driver.findElement(By.xpath(HomePageXPATHConstants.RESULT_PRODUCT)).click();
     }
 
     public String getPriceFromTxt() throws FileNotFoundException {

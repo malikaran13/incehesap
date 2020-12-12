@@ -1,5 +1,6 @@
 package pages;
 
+import constants.ProductPageXPATHConstants;
 import interfaces.IProductPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -10,11 +11,11 @@ public class ProductPage extends PageObject implements IProductPage {
         super(driver);
     }
     public String getProductName(){
-        return driver.findElement(By.xpath("//*[@class=\"detail\"]/h1")).getText();
+        return driver.findElement(By.xpath(ProductPageXPATHConstants.PRODUCT_NAME)).getText();
     }
 
     public String getProductPrice(){
-        return driver.findElement(By.xpath("//*[@class=\"arti-indirimli-fiyat cur\"]")).getText();
+        return driver.findElement(By.xpath(ProductPageXPATHConstants.PRODUCT_PRICE)).getText();
     }
 
     public void printProductInfoToTxtFile(){
@@ -23,6 +24,6 @@ public class ProductPage extends PageObject implements IProductPage {
     }
 
     public void addProductToCart(){
-        driver.findElement(By.xpath("//*[@class=\"btn btn-to-cart\"]")).click();
+        driver.findElement(By.xpath(ProductPageXPATHConstants.ADD_TO_CART)).click();
     }
 }

@@ -7,4 +7,5 @@ public interface ILoginPage {
     String getLoginTitle();
     void openLoginBox();
     void loginToInceHesap(String strUserName,String strPassword);
+    boolean verifyLogin();
 }

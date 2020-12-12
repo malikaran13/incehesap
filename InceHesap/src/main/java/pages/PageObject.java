@@ -1,7 +1,7 @@
 package pages;
 
 import au.com.bytecode.opencsv.CSVReader;
-import constants.MainConstants;
+import constants.FileConstants;
 import interfaces.IPageObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -24,7 +24,7 @@ public class PageObject implements IPageObject {
     }
 
     public List readDataFromCSV() throws IOException {
-        CSVReader reader = new CSVReader(new FileReader(MainConstants.CSVFile));
+        CSVReader reader = new CSVReader(new FileReader(FileConstants.CSVFilePath));
         List userInfo = new ArrayList();
         String[] cell;
 
@@ -45,7 +45,7 @@ public class PageObject implements IPageObject {
 
     public void printToTxt(String value) {
 
-        File file = new File("src\\main\\resources\\data\\ProductInfo.txt");
+        File file = new File(FileConstants.TXTFilePath);
 
         try {
             FileWriter fw = new FileWriter(file, true);
@@ -63,7 +63,7 @@ public class PageObject implements IPageObject {
     public ArrayList<String> readFromTxt() throws FileNotFoundException {
         // pass the path to the file as a parameter
         ArrayList<String> txtList = new ArrayList<String>();
-        File file = new File("src\\main\\resources\\data\\ProductInfo.txt");
+        File file = new File(FileConstants.TXTFilePath);
         Scanner sc = new Scanner(file);
 
         while (sc.hasNextLine())

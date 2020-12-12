@@ -1,7 +1,8 @@
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
-import org.openqa.selenium.By;
+import constants.ExpectedConstants;
+import constants.FileConstants;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
@@ -48,18 +49,17 @@ public class TestInceHesap {
         cartPage = new CartPage(driver);
 
         //- Ana sayfanın açıldığı kontrol edilir
-        String loginPageTitle = loginPage.getLoginTitle();
-        Assert.assertEquals(loginPageTitle,"incehesap.com");
+        Assert.assertEquals(loginPage.getLoginTitle(), ExpectedConstants.LOGIN_PAGE_TITLE);
 
         //- Siteye login olunur
         loginPage.loginToInceHesap(loginPage.getUsername(),loginPage.getPassword());
 
         //- Login işlemi kontrol edilir.
-        Assert.assertTrue(driver.findElement(By.xpath("//*[contains(text(),'Çıkış')]")).isDisplayed());
+        Assert.assertTrue(loginPage.verifyLogin());
         homePage.acceptCookies();
 
         //- Arama kutucuğuna “bilgisayar” kelimesi girilir.
-        homePage.queryProduct("bilgisayar");
+        homePage.queryProduct(ExpectedConstants.QUERY_PRODUCT);
 
         //- Sonuca göre sergilenen ürünlerden rastgele bir ürün seçilir.
         homePage.selectResultProduct();
@@ -75,7 +75,7 @@ public class TestInceHesap {
 
         //- Adet arttırılarak ürün adedinin 2 olduğu doğrulanır.
         cartPage.raiseQuantity();
-        Assert.assertEquals(cartPage.verifyQuantity(),"2 adet");
+        Assert.assertEquals(cartPage.verifyQuantity(), ExpectedConstants.PRODUCT_QTY);
 
         //- Ürün sepetten silinerek sepetin boş olduğu kontrol edilir.
         cartPage.removeProduct();
@@ -85,7 +85,7 @@ public class TestInceHesap {
     @AfterTest
     public void tearDown()
     {
-        homePage.deleteFile("D:\\mali\\InceHesap\\src\\main\\resources\\data\\ProductInfo.txt");
+        homePage.deleteFile(FileConstants.TXTFilePath);
         driver.quit();
     }
 }
